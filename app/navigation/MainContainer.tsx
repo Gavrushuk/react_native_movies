@@ -4,7 +4,7 @@ import { createStackNavigator, StackNavigationOptions } from "@react-navigation/
 import BottomBar from "./BottomBar";
 import { RootStackParamList } from "./Types";
 import DetailScreen from "../screens/DetailScreen";
-import { Image, ProgressBarAndroidComponent, StatusBar } from "react-native";
+import { Image, StatusBar } from "react-native";
 
 const Stack = createStackNavigator<RootStackParamList>()
 
@@ -43,11 +43,11 @@ const screenOptions: StackNavigationOptions = {
 
 const MainContainer = () => {
   return (
-    <NavigationContainer theme={NavigationContainerTheme}>
+    <NavigationContainer theme={ NavigationContainerTheme }>
       <StatusBar backgroundColor="#242A32" />
 
       <Stack.Navigator
-        screenOptions={screenOptions}
+        screenOptions={ screenOptions }
       >
         <Stack.Screen
           name="Main"

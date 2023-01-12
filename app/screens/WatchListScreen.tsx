@@ -4,7 +4,7 @@ import { MainTabScreenProps } from "../navigation/Types";
 
 const WatchListScreen = ({ navigation }: MainTabScreenProps<'WatchList'>) => {
   return (
-    <ScrollView style={styles.scrollView}>
+    <ScrollView style={ styles.scrollView }>
       <Text>Watch list screen</Text>
 
       <Button
@@ -20,8 +20,8 @@ const WatchListScreen = ({ navigation }: MainTabScreenProps<'WatchList'>) => {
 const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: '#242A32',
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingLeft: 25,
+    paddingRight: 25,
   }
 });
 

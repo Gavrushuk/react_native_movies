@@ -1,11 +1,18 @@
-import React from "react";
-import { Button, ScrollView, StyleSheet, Text, View } from "react-native";
+import React, { useEffect } from "react";
+import { Button, ScrollView, StyleSheet, View } from "react-native";
+import SearchInput from "../elements/SearchInput";
 import { MainTabScreenProps } from "../navigation/Types";
 
 const SearchScreen = ({ navigation }: MainTabScreenProps<'Search'>) => {
   return (
-    <ScrollView style={styles.scrollView}>
-      <Text>Search screen</Text>
+    <ScrollView style={ styles.scrollView }>
+      <View
+        style={{
+          marginVertical: 21
+        }}
+      >
+        <SearchInput />
+      </View>
 
       <Button
         onPress={
@@ -20,8 +27,8 @@ const SearchScreen = ({ navigation }: MainTabScreenProps<'Search'>) => {
 const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: '#242A32',
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingLeft: 25,
+    paddingRight: 25,
   }
 });
 

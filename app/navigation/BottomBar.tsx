@@ -95,22 +95,22 @@ const BottomBar = () => {
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      screenOptions={screenOptions}
+      screenOptions={ screenOptions }
     >
       <Tab.Screen
         name="Home"
         component={ HomeScreen }
-        options={homeScreenOptions}
+        options={ homeScreenOptions }
       />
       <Tab.Screen
         name="Search"
         component={ SearchScreen }
-        options={searchScreenOptions}
+        options={ searchScreenOptions }
       />
       <Tab.Screen
         name="WatchList"
         component={ FavoritesScreen }
-        options={watchListScreenOptions}
+        options={ watchListScreenOptions }
       />
     </Tab.Navigator>
   )

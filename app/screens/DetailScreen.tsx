@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 
 const DetailScreen = () => {
   return (
-    <View style={styles.scrollView}>
+    <View style={ styles.scrollView }>
       <Text>Detail screen</Text>
     </View>
   );

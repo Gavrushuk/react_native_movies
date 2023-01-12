@@ -16,7 +16,7 @@ export type RootStackScreenProps<T extends keyof RootStackParamList> =
 
 export type MainTabParamList = {
   Home: undefined;
-  Search: undefined;
+  Search: { isAutoFocused?: Boolean };
   WatchList: undefined;
 };
 
