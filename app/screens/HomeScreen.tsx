@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import BestRateMovies from "../elements/BestRateMovies";
 import SearchInput from "../elements/SearchInput";
 import { MainTabScreenProps } from "../navigation/Types";
 
@@ -28,6 +29,8 @@ const HomeScreen = ({ navigation }: MainTabScreenProps<'Home'>) => {
           <SearchInput />
         </View>
       </Pressable>
+
+      <BestRateMovies />
 
       <Button
         onPress={ goToDatail }
