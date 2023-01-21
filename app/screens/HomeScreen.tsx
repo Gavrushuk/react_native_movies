@@ -1,6 +1,7 @@
 import React from "react";
-import { Button, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Alert, Button, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import BestRateMovies from "../elements/BestRateMovies";
+import HomeTabs from "../elements/HomeTabs";
 import SearchInput from "../elements/SearchInput";
 import { MainTabScreenProps } from "../navigation/Types";
 
@@ -14,14 +15,18 @@ const HomeScreen = ({ navigation }: MainTabScreenProps<'Home'>) => {
   };
   
   return (
-    <ScrollView style={ styles.scrollView }>
-      <Text style={ styles.title }>What do you want to watch?</Text>
+    <ScrollView
+      style={ styles.scrollView }
+    >
+      <Text
+        style={ styles.title }
+      >
+        What do you want to watch?
+      </Text>
 
       <Pressable
         onPress={ goToSearch }
-        style={{
-          marginVertical: 21
-        }}
+        style={ styles.searchBtn }
       >
         <View
           pointerEvents="none"
@@ -30,11 +35,12 @@ const HomeScreen = ({ navigation }: MainTabScreenProps<'Home'>) => {
         </View>
       </Pressable>
 
-      <BestRateMovies />
-
-      <Button
-        onPress={ goToDatail }
-        title="Go to Detail"
+      <BestRateMovies
+        goToDetail={ goToDatail }
+      />
+      
+      <HomeTabs
+        goToDetail={ goToDatail }
       />
     </ScrollView>
   );
@@ -45,13 +51,16 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     fontSize: 18,
     lineHeight: 27,
-    fontWeight: '600'
+    fontWeight: '600',
+    marginHorizontal: 25,
+  },
+  searchBtn: {
+    marginVertical: 21,
+    marginHorizontal: 25
   },
   scrollView: {
     backgroundColor: '#242A32',
-    paddingLeft: 25,
-    paddingRight: 25,
-  }
+  },
 });
 
 export default HomeScreen;

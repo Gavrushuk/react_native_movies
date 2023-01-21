@@ -17,7 +17,9 @@ const SearchInput = () => {
   }, [route.params]);
 
   return (
-    <View style={ styles.SectionStyle }>
+    <View
+      style={ styles.SectionStyle }
+    >
       <TextInput
         style={ styles.TextInputStyle }
         placeholderTextColor={ '#67686D' }

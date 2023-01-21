@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Button, ScrollView, StyleSheet, View } from "react-native";
 import SearchInput from "../elements/SearchInput";
 import { MainTabScreenProps } from "../navigation/Types";
 
 const SearchScreen = ({ navigation }: MainTabScreenProps<'Search'>) => {
   return (
-    <ScrollView style={ styles.scrollView }>
+    <ScrollView
+      style={ styles.scrollView }
+    >
       <View
-        style={{
-          marginVertical: 21
-        }}
+        style={ styles.searchInputWrapper }
       >
         <SearchInput />
       </View>
@@ -29,6 +29,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#242A32',
     paddingLeft: 25,
     paddingRight: 25,
+  },
+  searchInputWrapper: {
+    marginVertical: 21,
   }
 });
 
