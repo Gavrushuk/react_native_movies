@@ -32,7 +32,7 @@ const screenOptions: StackNavigationOptions = {
   },
   headerBackImage: () => (
     <Image
-      source={ require("../../assets/back_button.png") }
+      source={ require("../../assets/icons/back_button.png") }
       style={{
         width: 36,
         height: 36,

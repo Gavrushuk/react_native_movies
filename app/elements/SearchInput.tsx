@@ -29,7 +29,7 @@ const SearchInput = () => {
       />
 
       <Image
-        source={ require("../../assets/search_icon.png") }
+        source={ require("../../assets/icons/search_icon.png") }
         style={ styles.ImageStyle }
       />
     </View>

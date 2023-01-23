@@ -1,27 +1,31 @@
 import React from "react";
-import { Button, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Button, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import MoviesList from "../elements/MoviesList";
 import { MainTabScreenProps } from "../navigation/Types";
 
 const WatchListScreen = ({ navigation }: MainTabScreenProps<'WatchList'>) => {
-  return (
-    <ScrollView style={ styles.scrollView }>
-      <Text>Watch list screen</Text>
+  const goToDatail = () => {
+    navigation.navigate('Detail');
+  };
 
-      <Button
-        onPress={
-          () => navigation.navigate('Detail')
-        }
-        title="Go to Detail"
+  return (
+    <SafeAreaView
+      style={ styles.scrollView }
+    >
+      <MoviesList
+        goToDetail={ goToDatail }
       />
-    </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   scrollView: {
+    flex: 1,
     backgroundColor: '#242A32',
     paddingLeft: 25,
     paddingRight: 25,
+    paddingTop: 24,
   }
 });
 

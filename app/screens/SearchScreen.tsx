@@ -1,11 +1,16 @@
 import React from "react";
-import { Button, ScrollView, StyleSheet, View } from "react-native";
+import { SafeAreaView, StyleSheet, View } from "react-native";
+import MoviesList from "../elements/MoviesList";
 import SearchInput from "../elements/SearchInput";
 import { MainTabScreenProps } from "../navigation/Types";
 
 const SearchScreen = ({ navigation }: MainTabScreenProps<'Search'>) => {
+  const goToDatail = () => {
+    navigation.navigate('Detail');
+  };
+
   return (
-    <ScrollView
+    <SafeAreaView
       style={ styles.scrollView }
     >
       <View
@@ -13,19 +18,17 @@ const SearchScreen = ({ navigation }: MainTabScreenProps<'Search'>) => {
       >
         <SearchInput />
       </View>
-
-      <Button
-        onPress={
-          () => navigation.navigate('Detail')
-        }
-        title="Go to Detail"
+      
+      <MoviesList
+        goToDetail={ goToDatail }
       />
-    </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   scrollView: {
+    flex: 1,
     backgroundColor: '#242A32',
     paddingLeft: 25,
     paddingRight: 25,

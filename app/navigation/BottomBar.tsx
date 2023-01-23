@@ -41,8 +41,8 @@ const homeScreenOptions = {
     <Image
       source={
         focused
-          ? require("../../assets/home_active.png")
-          : require("../../assets/home.png")
+          ? require("../../assets/icons/home_active.png")
+          : require("../../assets/icons/home.png")
       }
       style={{
         width: 22,
@@ -60,8 +60,8 @@ const searchScreenOptions = {
     <Image
       source={
         focused
-          ? require("../../assets/search_active.png")
-          : require("../../assets/search.png")
+          ? require("../../assets/icons/search_active.png")
+          : require("../../assets/icons/search.png")
       }
       style={{
         width: 22,
@@ -80,8 +80,8 @@ const watchListScreenOptions = {
     <Image
       source={
         focused
-          ? require("../../assets/favorites_active.png")
-          : require("../../assets/favorites.png")
+          ? require("../../assets/icons/favorites_active.png")
+          : require("../../assets/icons/favorites.png")
       }
       style={{
         width: 22,
