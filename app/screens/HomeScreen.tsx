@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert, Button, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import BestRateMovies from "../elements/BestRateMovies";
 import HomeTabs from "../elements/HomeTabs";
 import SearchInput from "../elements/SearchInput";
