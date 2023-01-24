@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, Image, Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { FlatList, Image, Pressable, StyleSheet, Text, View } from "react-native";
 
-const MoviesList = ({ goToDetail }: any) => {
+type Props = {
+  goToDetail: () => void
+};
+
+const MoviesList = ({ goToDetail }: Props) => {
   const [list, setList]: any = useState([]);
 
   const listItem = (item: any) => {
@@ -87,7 +91,7 @@ const MoviesList = ({ goToDetail }: any) => {
       <FlatList
         data={ list }
         renderItem={ ({ item }) => listItem(item) }
-        keyExtractor={({ item, index }) => index}
+        keyExtractor={ ({ item, index }) => index }
         showsVerticalScrollIndicator={ false }
       />
     </View>

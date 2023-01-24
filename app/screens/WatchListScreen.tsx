@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet } from "react-native";
 import MoviesList from "../elements/MoviesList";
 import { MainTabScreenProps } from "../navigation/Types";
 
