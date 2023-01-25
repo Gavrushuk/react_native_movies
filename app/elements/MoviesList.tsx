@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FlatList, Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 type Props = {
+  list: any[],
   goToDetail: () => void
 };
 
-const MoviesList = ({ goToDetail }: Props) => {
-  const [list, setList]: any = useState([]);
+const MoviesList = ({ list, goToDetail }: Props) => {
+  const API_IMG = "https://image.tmdb.org/t/p/w300/";
 
   const listItem = (item: any) => {
     return (
@@ -17,7 +18,7 @@ const MoviesList = ({ goToDetail }: Props) => {
         <View>
           <Image
             style={ styles.listItemImg }
-            source={ require("../../assets/movies/movie-1.png") }
+            source={ { uri: `${API_IMG}${item.poster_path }` } }
           />
         </View>
         
@@ -27,7 +28,7 @@ const MoviesList = ({ goToDetail }: Props) => {
           <Text
             numberOfLines={ 1 }
             style={ styles.title }
-          >Title</Text>
+          >{ item.title }</Text>
 
           <View>
             <View
@@ -39,7 +40,7 @@ const MoviesList = ({ goToDetail }: Props) => {
               />
               <Text
                 style={ [styles.listItemInfoText, styles.rateText] }
-              >9.5</Text>
+              >{ item.vote_average }</Text>
             </View>
             <View
               style={ styles.listItemInfoLine }
@@ -61,7 +62,7 @@ const MoviesList = ({ goToDetail }: Props) => {
               />
               <Text
                 style={ styles.listItemInfoText }
-              >2019</Text>
+              >{ new Date(item.release_date).getFullYear() }</Text>
             </View>
             <View
               style={ styles.listItemInfoLine }
@@ -72,17 +73,13 @@ const MoviesList = ({ goToDetail }: Props) => {
               />
               <Text
                 style={ styles.listItemInfoText }
-              >139 minutes</Text>
+              >{ item.vote_average } minutes</Text>
             </View>
           </View>
         </View>
       </Pressable>
     );
   }
-
-  useEffect(() => {
-    setList(Array(50).fill(''));
-  }, []);
 
   return (
     <View

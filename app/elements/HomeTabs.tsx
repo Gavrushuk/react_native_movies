@@ -12,7 +12,7 @@ type Props = {
   goToDetail: () => void
 };
 
-const BestRateMovies = ({ goToDetail }: Props) => {
+const HomeTabs = ({ goToDetail }: Props) => {
   const listTab = [
     { title: "Now playing", value: "now_playing" },
     { title: "Upcoming", value: "upcoming" },
@@ -164,4 +164,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default BestRateMovies;
+export default HomeTabs;

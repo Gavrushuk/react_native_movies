@@ -31,7 +31,9 @@ const HomeScreen = ({ navigation }: MainTabScreenProps<'Home'>) => {
         <View
           pointerEvents="none"
         >
-          <SearchInput />
+          <SearchInput
+            onChange={ () => {} }
+          />
         </View>
       </Pressable>
 

@@ -1,9 +1,13 @@
 import { useRoute } from "@react-navigation/native";
 import React, { useEffect } from "react";
-import { Image, StyleSheet, View } from "react-native";
+import { Image, NativeSyntheticEvent, StyleSheet, TextInputSubmitEditingEventData, View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 
-const SearchInput = () => {
+type Props = {
+  onChange: (search: string) => void
+};
+
+const SearchInput = ({ onChange }: Props) => {
   const route: any = useRoute();
 
   let SearchTextInputRef: TextInput;
@@ -26,6 +30,8 @@ const SearchInput = () => {
         placeholder="Search"
         underlineColorAndroid="transparent"
         ref={(input: TextInput) => { SearchTextInputRef = input; }}
+        onSubmitEditing={ (e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => onChange(e.nativeEvent.text) }
+        clearButtonMode="while-editing"
       />
 
       <Image

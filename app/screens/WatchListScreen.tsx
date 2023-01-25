@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
 import MoviesList from "../elements/MoviesList";
+import WatchListNoResults from "../elements/WatchListNoResults";
 import { MainTabScreenProps } from "../navigation/Types";
 
 const WatchListScreen = ({ navigation }: MainTabScreenProps<'WatchList'>) => {
+  const [movies, setMovies] = useState([]);
+  
   const goToDatail = () => {
     navigation.navigate('Detail');
   };
@@ -12,9 +15,14 @@ const WatchListScreen = ({ navigation }: MainTabScreenProps<'WatchList'>) => {
     <SafeAreaView
       style={ styles.scrollView }
     >
-      <MoviesList
-        goToDetail={ goToDatail }
-      />
+      {
+        movies?.length ?
+          <MoviesList
+            list={ movies }
+            goToDetail={ goToDatail }
+          />
+        : <WatchListNoResults />
+      }
     </SafeAreaView>
   );
 };
