@@ -1,18 +1,78 @@
-import React, { useState } from "react";
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { useRoute } from "@react-navigation/native";
+import React, { useEffect, useState } from "react";
+import { Alert, Image, ScrollView, StyleSheet, Text, ToastAndroid, View } from "react-native";
+import config from "../../config";
 import MovieDeatilsAbout from "../elements/MovieDetailsAbout";
 import MovieDeatilsCast from "../elements/MovieDetailsCast";
 import MovieDeatilsReviews from "../elements/MovieDetailsReviews";
 import Tabs from "../elements/Tabs";
 
 const DetailScreen = () => {
+  const API_BACKDROP_IMG = "https://image.tmdb.org/t/p/original";
+  const API_POSTER_IMG = "https://image.tmdb.org/t/p/w300";
+  const route: any = useRoute();
   const listTab = [
     { title: "About Movie", value: "about_movie" },
     { title: "Reviews", value: "reviews" },
     { title: "Cast", value: "cast" },
   ];
-
   const [activeTab, setActiveTab] = useState("about_movie");
+  const [movie, setMovie] = useState<any>();
+  const [reviews, setReviews] = useState([]);
+  const [credits, setCredits] = useState<any>([]);
+
+  const getMovieDetailsById = (id: number) => {
+    fetch(`https://api.themoviedb.org/3/movie/${ id }?api_key=${ config.TMDB_API_KEY }&language=en-US`)
+      .then(res => res.json())
+      .then(data => {
+        if (data) {
+          console.log(data.backdrop_path);
+          setMovie(data);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        ToastAndroid.show('Get Movie Details Error', ToastAndroid.SHORT);
+      });
+  };
+
+  const getReviews = (id: number) => {
+    fetch(`https://api.themoviedb.org/3/movie/${ id }/reviews?api_key=${ config.TMDB_API_KEY }&language=en-US&page=1`)
+      .then(res => res.json())
+      .then(data => {
+        if (data) {
+          setReviews(data.results);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        ToastAndroid.show('Get Reviews Error', ToastAndroid.SHORT);
+      });
+  };
+
+  const getCredits = (id: number) => {
+    fetch(`https://api.themoviedb.org/3/movie/${ id }/credits?api_key=${ config.TMDB_API_KEY }&language=en-US`)
+      .then(res => res.json())
+      .then(data => {
+        if (data) {
+          setCredits(data);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        ToastAndroid.show('Get Credits Error', ToastAndroid.SHORT);
+      });
+  };
+
+  useEffect(() => {
+    const { id } = route.params;
+
+    if (id) {
+      getMovieDetailsById(id);
+      getReviews(id);
+      getCredits(id);
+    }
+  }, []);
 
   return (
     <ScrollView
@@ -23,7 +83,7 @@ const DetailScreen = () => {
       >
         <Image
           style={ styles.backdropImg }
-          source={ require('../../assets/movies/movie-2.png') }
+          source={ { uri: `${API_BACKDROP_IMG}${movie?.backdrop_path}` } }
         />
 
         <View
@@ -47,7 +107,7 @@ const DetailScreen = () => {
         >
           <Image
             style={ styles.movieDetailsImg }
-            source={ require('../../assets/movies/movie-2.png') }
+            source={ { uri: `${API_POSTER_IMG}${movie?.poster_path}` } }
           />
           <Text
             numberOfLines={ 2 }
@@ -67,7 +127,7 @@ const DetailScreen = () => {
             />
             <Text
               style={ styles.movieDetailsText }
-            >2021</Text>
+            >{ new Date(movie?.release_date).getFullYear() }</Text>
           </View>
           <View
             style={ [styles.movieDetailsLineItem, styles.movieDetailsLineSecondItem] }
@@ -78,7 +138,7 @@ const DetailScreen = () => {
             />
             <Text
               style={ styles.movieDetailsText }
-            >139 minutes</Text>
+            >{ movie?.runtime } minutes</Text>
           </View>
           <View
             style={ styles.movieDetailsLineItem }
@@ -89,7 +149,7 @@ const DetailScreen = () => {
             />
             <Text
               style={ styles.movieDetailsText }
-            >Action</Text>
+            >{ movie?.genres.map((g: any) => g.name)[0] }</Text>
           </View>
         </View>
       </View>
@@ -103,13 +163,13 @@ const DetailScreen = () => {
           onSelect={ setActiveTab }
         />
       </View>
-
+      
       <View
         style={ styles.tabContentWrapper }
       >
-        { activeTab === 'about_movie' ? <MovieDeatilsAbout /> : '' }
-        { activeTab === 'reviews' ? <MovieDeatilsReviews list={ Array(10).fill('') } /> : '' }
-        { activeTab === 'cast' ? <MovieDeatilsCast list={ Array(10).fill('') } /> : '' }
+        { activeTab === 'about_movie' ? <MovieDeatilsAbout description={ movie?.overview } /> : '' }
+        { activeTab === 'reviews' ? <MovieDeatilsReviews list={ reviews } /> : '' }
+        { activeTab === 'cast' ? <MovieDeatilsCast list={ credits.cast } /> : '' }
       </View>
     </ScrollView>
   );

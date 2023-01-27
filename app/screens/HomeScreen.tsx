@@ -10,8 +10,8 @@ const HomeScreen = ({ navigation }: MainTabScreenProps<'Home'>) => {
     navigation.navigate('Search', { isAutoFocused: true });
   };
   
-  const goToDatail = () => {
-    navigation.navigate('Detail');
+  const goToDatail = (id: number) => {
+    navigation.navigate('Detail', { id });
   };
   
   return (

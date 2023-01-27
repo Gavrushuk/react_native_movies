@@ -1,12 +1,16 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-const MovieDeatilsAbout = () => {
+type Props = {
+  description: string,
+};
+
+const MovieDeatilsAbout = ({ description }: Props) => {
   return (
     <View>
       <Text
         style={ styles.text }
-      >From DC Comics comes the Suicide Squad, an antihero team of incarcerated supervillains who act as deniable assets for the United States government, undertaking high-risk black ops missions in exchange for commuted prison sentences.</Text>
+      >{ description }</Text>
     </View>
   );
 };

@@ -9,7 +9,7 @@ type Tab = {
 };
 
 type Props = {
-  goToDetail: () => void
+  goToDetail: (id: number) => void
 };
 
 const HomeTabs = ({ goToDetail }: Props) => {
@@ -43,12 +43,12 @@ const HomeTabs = ({ goToDetail }: Props) => {
   };
 
   const listCardItem = (item: any, index: number) => {
-    const API_IMG = "https://image.tmdb.org/t/p/w300/";
+    const API_IMG = "https://image.tmdb.org/t/p/w300";
 
     return (
       <Pressable
         style={ styles.listCardItem }
-        onPress={ goToDetail }
+        onPress={ () => goToDetail(item.id) }
         key={ index }
       >
         <View>

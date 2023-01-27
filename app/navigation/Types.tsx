@@ -7,7 +7,7 @@ import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 
 export type RootStackParamList = {
   Main: NavigatorScreenParams<MainTabParamList>;
-  Detail: undefined;
+  Detail: { id: number };
 };
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> =

@@ -7,6 +7,8 @@ type Props = {
 
 const MovieDeatilsReviews = ({ list }: Props) => {
   const review = (item: any, index: number) => {
+    const API_IMG = "https://image.tmdb.org/t/p/w300";
+
     return (
       <View
         style={ styles.review }
@@ -17,11 +19,15 @@ const MovieDeatilsReviews = ({ list }: Props) => {
         >
           <Image
             style={ styles.reviewAvatar }
-            source={ require('../../assets/movies/movie-2.png') }
+            source={
+              item.author_details.avatar_path ?
+                { uri: `${API_IMG}${item.author_details.avatar_path}` }
+                : require('../../assets/icons/default_avatar.png')
+            }
           />
           <Text
             style={ styles.reviewRate }
-          >6.3</Text>
+          >{ item.author_details.rating }</Text>
         </View>
         <View
           style={ styles.reviewRightSide }
@@ -29,12 +35,10 @@ const MovieDeatilsReviews = ({ list }: Props) => {
           <Text
             numberOfLines={ 1 }
             style={ styles.reviewTitle }
-          >Iqbal Shafiq Rozaan</Text>
+          >{ item.author }</Text>
           <Text
             style={ styles.reviewDescription }
-          >
-            From DC Comics comes the Suicide Squad, an antihero team of incarcerated supervillains who act as deniable assets for the United States government.
-          </Text>
+          >{ item.content }</Text>
         </View>
       </View>
     );

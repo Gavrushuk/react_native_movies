@@ -4,7 +4,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import config from "../../config.js";
 
 type Props = {
-  goToDetail: () => void
+  goToDetail: (id: number) => void
 };
 
 const BestRateMovies = ({ goToDetail }: Props) => {
@@ -42,7 +42,7 @@ const BestRateMovies = ({ goToDetail }: Props) => {
   };
 
   const BestMovieCard = (movie: any, index: number) => {
-    const API_IMG = "https://image.tmdb.org/t/p/w400/";
+    const API_IMG = "https://image.tmdb.org/t/p/w400";
 
     return (
       <Pressable
@@ -51,7 +51,7 @@ const BestRateMovies = ({ goToDetail }: Props) => {
           index === 0 && styles.firstCard,
           index === (movies.length - 1) && styles.lastCard
         ]}
-        onPress={ goToDetail }
+        onPress={ () => goToDetail(movie?.id) }
         key={ index }
       >
         <View

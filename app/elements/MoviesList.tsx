@@ -7,7 +7,7 @@ type Props = {
 };
 
 const MoviesList = ({ list, goToDetail }: Props) => {
-  const API_IMG = "https://image.tmdb.org/t/p/w300/";
+  const API_IMG = "https://image.tmdb.org/t/p/w300";
 
   const listItem = (item: any, index: number) => {
     return (

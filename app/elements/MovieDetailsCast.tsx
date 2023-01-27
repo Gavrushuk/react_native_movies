@@ -7,6 +7,8 @@ type Props = {
 
 const MovieDeatilsCast = ({ list }: Props) => {
   const castItem = (item: any, index: number) => {
+    const API_IMG = "https://image.tmdb.org/t/p/w300";
+
     return (
       <View
         style={ styles.castItem }
@@ -14,12 +16,16 @@ const MovieDeatilsCast = ({ list }: Props) => {
       >
         <Image
           style={ styles.castItemAvatar }
-          source={ require('../../assets/movies/movie-2.png') }
+          source={
+            item.profile_path ?
+              { uri: `${API_IMG}${item.profile_path}` }
+              : require('../../assets/icons/default_avatar.png')
+          }
         />
         <Text
           numberOfLines={ 2 }
           style={ styles.castItemName }
-        >Tom Holland</Text>
+        >{ item.name }</Text>
       </View>
     );
   };
