@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     overflow: 'hidden',
     height: 145,
-    width: `${88 / 3}%`,
+    width: `29%`,
   },
   listCardItemImg: {
     height: '100%',
