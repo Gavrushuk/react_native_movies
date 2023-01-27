@@ -9,11 +9,12 @@ type Props = {
 const MoviesList = ({ list, goToDetail }: Props) => {
   const API_IMG = "https://image.tmdb.org/t/p/w300/";
 
-  const listItem = (item: any) => {
+  const listItem = (item: any, index: number) => {
     return (
       <Pressable
         style={ styles.listItem }
         onPress={ goToDetail }
+        key={ index }
       >
         <View>
           <Image
@@ -87,7 +88,7 @@ const MoviesList = ({ list, goToDetail }: Props) => {
     >
       <FlatList
         data={ list }
-        renderItem={ ({ item }) => listItem(item) }
+        renderItem={ ({ item, index }) => listItem(item, index) }
         keyExtractor={ ({ item, index }) => index }
         showsVerticalScrollIndicator={ false }
       />

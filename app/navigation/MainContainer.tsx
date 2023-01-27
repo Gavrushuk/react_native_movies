@@ -1,10 +1,10 @@
 import React from "react";
-import { DefaultTheme, NavigationContainer, Theme } from "@react-navigation/native";
+import { DefaultTheme, NavigationContainer, Theme, useRoute } from "@react-navigation/native";
 import { createStackNavigator, StackNavigationOptions } from "@react-navigation/stack";
 import BottomBar from "./BottomBar";
 import { RootStackParamList } from "./Types";
 import DetailScreen from "../screens/DetailScreen";
-import { Image, StatusBar } from "react-native";
+import { Image, Pressable, StatusBar, StyleSheet } from "react-native";
 
 const Stack = createStackNavigator<RootStackParamList>()
 
@@ -41,6 +41,29 @@ const screenOptions: StackNavigationOptions = {
   ),
 };
 
+const DetailsHeaderMark = () => {
+  const route: any = useRoute();
+
+  const markMovie = () => {
+    
+  }
+  
+  return (
+    <Pressable
+      onPress={ () => markMovie }
+    >
+      <Image
+        source={ require('../../assets/icons/mark.png') }
+        style={ styles.headerRightIcon }
+      />
+      {/* <Image
+        source={ require('../../assets/icons/mark_active.png') }
+        style={ styles.headerRightIcon }
+      /> */}
+    </Pressable>
+  );
+};
+
 const MainContainer = () => {
   return (
     <NavigationContainer theme={ NavigationContainerTheme }>
@@ -59,10 +82,21 @@ const MainContainer = () => {
         <Stack.Screen
           name="Detail"
           component={ DetailScreen }
+          options={() => ({
+            headerRight: () => <DetailsHeaderMark />
+          })}
         />
       </Stack.Navigator>
     </NavigationContainer>
   )
 };
+
+const styles = StyleSheet.create({
+  headerRightIcon: {
+    width: 18,
+    height: 24,
+    margin: 24,
+  }
+});
 
 export default MainContainer;

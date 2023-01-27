@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Image, Pressable, ToastAndroid, StyleSheet, Text, View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import { Image, Pressable, ToastAndroid, StyleSheet, View } from "react-native";
 import config from "../../config.js";
+import Tabs from "./Tabs";
 
 type Tab = {
   title: string,
@@ -42,26 +42,6 @@ const HomeTabs = ({ goToDetail }: Props) => {
       });
   };
 
-  const ListTabItem = (tab: Tab, index: number) => (
-    <Pressable
-      style={[
-        styles.btnTab,
-        activeTab === tab.value && styles.btnTabActive,
-        index === 0 && styles.firstBtnTab,
-        index === (listTab.length - 1) && styles.lastBtnTab
-      ]}
-      onPress={ () => setActiveTab(tab.value) }
-      key={ index }
-    >
-      <Text
-        style={[
-          styles.tabText,
-          activeTab === tab.value && styles.tabTextActive
-        ]}
-      >{ tab.title }</Text>
-    </Pressable>
-  );
-
   const listCardItem = (item: any, index: number) => {
     const API_IMG = "https://image.tmdb.org/t/p/w300/";
 
@@ -85,13 +65,11 @@ const HomeTabs = ({ goToDetail }: Props) => {
     <View
       style={ styles.container }
     >
-      <ScrollView
-        style={ styles.listTab }
-        horizontal
-        showsHorizontalScrollIndicator={ false }
-      >
-        { listTab.map((tab: Tab, index: number) => ListTabItem(tab, index)) }
-      </ScrollView>
+      <Tabs
+        activeTab={ activeTab }
+        listTab={ listTab }
+        onSelect={ setActiveTab }
+      />
 
       <View
         style={ styles.listCard }
