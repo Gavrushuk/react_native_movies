@@ -3,7 +3,7 @@ import { FlatList, Image, Pressable, StyleSheet, Text, View } from "react-native
 
 type Props = {
   list: any[],
-  goToDetail: () => void
+  goToDetail: (id: number) => void
 };
 
 const MoviesList = ({ list, goToDetail }: Props) => {
@@ -13,13 +13,17 @@ const MoviesList = ({ list, goToDetail }: Props) => {
     return (
       <Pressable
         style={ styles.listItem }
-        onPress={ goToDetail }
-        key={ index }
+        onPress={ () => goToDetail(item.id) }
+        key={ item.id }
       >
         <View>
           <Image
             style={ styles.listItemImg }
-            source={ { uri: `${API_IMG}${item.poster_path }` } }
+            source={ 
+              item.poster_path ?
+                { uri: `${API_IMG}${item.poster_path}` }
+                : require('../../assets/images/no_poster.png')
+              }
           />
         </View>
         

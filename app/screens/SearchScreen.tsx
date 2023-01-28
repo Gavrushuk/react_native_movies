@@ -23,8 +23,8 @@ const SearchScreen = ({ navigation }: MainTabScreenProps<'Search'>) => {
       });
   };
 
-  const goToDatail = () => {
-    navigation.navigate('Detail');
+  const goToDatail = (id: number) => {
+    navigation.navigate('Detail', { id });
   };
 
   return (

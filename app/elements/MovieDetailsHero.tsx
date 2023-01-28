@@ -16,7 +16,11 @@ const MovieDetailsHero = ({ movie }: Props) => {
       >
         <Image
           style={ styles.backdropImg }
-          source={ { uri: `${API_BACKDROP_IMG}${movie?.backdrop_path}` } }
+          source={
+            movie?.backdrop_path ?
+              { uri: `${API_BACKDROP_IMG}${movie?.backdrop_path}` }
+              : require('../../assets/images/no_backdrop.png')
+          }
         />
 
         <View
@@ -40,7 +44,11 @@ const MovieDetailsHero = ({ movie }: Props) => {
         >
           <Image
             style={ styles.movieDetailsImg }
-            source={ { uri: `${API_POSTER_IMG}${movie?.poster_path}` } }
+            source={
+              movie?.poster_path ?
+                { uri: `${API_POSTER_IMG}${movie?.poster_path}` }
+                : require('../../assets/images/no_poster.png')
+            }
           />
           <Text
             numberOfLines={ 2 }

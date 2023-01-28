@@ -86,38 +86,6 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 40,
   },
-  listTab: {
-    display: 'flex',
-    flexDirection: 'row',
-  },
-  firstBtnTab: {
-    marginLeft: 25,
-  },
-  lastBtnTab: {
-    marginRight: 25,
-  },
-  btnTab: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    borderBottomWidth: 4,
-    borderBottomColor: 'transparent',
-    marginHorizontal: 6,
-    paddingBottom: 10,
-    width: 88,
-  },
-  btnTabActive: {
-    borderBottomColor: '#3A3F47',
-  },
-  tabText: {
-    fontSize: 14,
-    lineHeight: 21,
-    fontWeight: '400',
-    color: '#ffffff',
-  },
-  tabTextActive: {
-    fontWeight: '500',
-  },
   listCard: {
     flex: 1,
     flexDirection: 'row',
@@ -127,12 +95,12 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   listCardItem: {
-    marginHorizontal: 7,
-    marginVertical: 9,
+    marginHorizontal: '2%',
+    marginVertical: '4%',
     borderRadius: 16,
     overflow: 'hidden',
     height: 145,
-    width: `29%`,
+    width: `${(100 / 3) - 4}%`,
   },
   listCardItemImg: {
     height: '100%',
