@@ -13,7 +13,7 @@ const WatchListScreen = ({ navigation }: MainTabScreenProps<'WatchList'>) => {
 
   return (
     <SafeAreaView
-      style={ styles.scrollView }
+      style={ styles.safeAreaView }
     >
       {
         movies?.length ?
@@ -28,7 +28,7 @@ const WatchListScreen = ({ navigation }: MainTabScreenProps<'WatchList'>) => {
 };
 
 const styles = StyleSheet.create({
-  scrollView: {
+  safeAreaView: {
     flex: 1,
     backgroundColor: '#242A32',
     paddingLeft: 25,

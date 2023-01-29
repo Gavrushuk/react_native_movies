@@ -17,6 +17,7 @@ const HomeScreen = ({ navigation }: MainTabScreenProps<'Home'>) => {
   return (
     <ScrollView
       style={ styles.scrollView }
+      showsVerticalScrollIndicator={ false }
     >
       <Text
         style={ styles.title }

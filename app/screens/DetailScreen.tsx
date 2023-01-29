@@ -94,6 +94,7 @@ const DetailScreen = () => {
   return (
     <ScrollView
       style={ styles.scrollView }
+      showsVerticalScrollIndicator={ false }
     >
       { movie ? <MovieDetailsHero movie={ movie } /> : '' }
 

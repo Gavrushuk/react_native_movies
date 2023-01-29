@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { FlatList, Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 
 type Props = {
   list: any[],
@@ -56,7 +56,7 @@ const MoviesList = ({ list, goToDetail }: Props) => {
               />
               <Text
                 style={ styles.listItemInfoText }
-              >Action</Text>
+              >{ item?.genres[0]?.name || '' }</Text>
             </View>
             <View
               style={ styles.listItemInfoLine }
@@ -78,7 +78,7 @@ const MoviesList = ({ list, goToDetail }: Props) => {
               />
               <Text
                 style={ styles.listItemInfoText }
-              >{ item.vote_average } minutes</Text>
+              >{ item?.runtime || 0 } minutes</Text>
             </View>
           </View>
         </View>
@@ -90,11 +90,7 @@ const MoviesList = ({ list, goToDetail }: Props) => {
     <View
       style={ styles.container }
     >
-      <FlatList
-        data={ list }
-        renderItem={ ({ item }) => listItem(item) }
-        showsVerticalScrollIndicator={ false }
-      />
+      { list.map(item => listItem(item)) }
     </View>
   );
 };
