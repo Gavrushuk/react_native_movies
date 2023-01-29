@@ -52,7 +52,7 @@ const BestRateMovies = ({ goToDetail }: Props) => {
           index === (movies.length - 1) && styles.lastCard
         ]}
         onPress={ () => goToDetail(movie?.id) }
-        key={ index }
+        key={ movie.id }
       >
         <View
           style={ styles.card }

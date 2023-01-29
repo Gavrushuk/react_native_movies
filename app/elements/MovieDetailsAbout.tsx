@@ -7,7 +7,9 @@ type Props = {
 
 const MovieDeatilsAbout = ({ description }: Props) => {
   return (
-    <View>
+    <View
+      style={ styles.container }
+    >
       <Text
         style={ styles.text }
       >{ description }</Text>
@@ -16,6 +18,9 @@ const MovieDeatilsAbout = ({ description }: Props) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    marginHorizontal: 25,
+  },
   text: {
     fontWeight: '400',
     fontSize: 12,

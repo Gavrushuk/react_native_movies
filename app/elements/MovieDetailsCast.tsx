@@ -6,13 +6,13 @@ type Props = {
 };
 
 const MovieDeatilsCast = ({ list }: Props) => {
-  const castItem = (item: any, index: number) => {
-    const API_IMG = "https://image.tmdb.org/t/p/w300";
+  const castItem = (item: any) => {
+    const API_IMG = "https://image.tmdb.org/t/p/w200";
 
     return (
       <View
         style={ styles.castItem }
-        key={ index }
+        key={ item.id }
       >
         <Image
           style={ styles.castItemAvatar }
@@ -35,7 +35,7 @@ const MovieDeatilsCast = ({ list }: Props) => {
       style={ styles.castList }
     >
       {
-        list.map((item: any, index: number) => castItem(item, index))
+        list.map((item: any) => castItem(item))
       }
     </View>
   );
@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
+    marginHorizontal: 25,
   },
   castItem: {
     flexDirection: 'column',
@@ -59,6 +60,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     resizeMode: 'cover',
     objectFit: 'cover',
+    backgroundColor: 'rgba(2, 150, 229, 0.7)',
   },
   castItemName: {
     fontWeight: '500',

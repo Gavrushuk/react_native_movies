@@ -7,8 +7,8 @@ import { MainTabScreenProps } from "../navigation/Types";
 const WatchListScreen = ({ navigation }: MainTabScreenProps<'WatchList'>) => {
   const [movies, setMovies] = useState([]);
   
-  const goToDatail = () => {
-    navigation.navigate('Detail');
+  const goToDatail = (id: number) => {
+    navigation.navigate('Detail', { id });
   };
 
   return (

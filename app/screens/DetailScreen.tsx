@@ -1,6 +1,6 @@
 import { useRoute } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import { Alert, Image, ScrollView, StyleSheet, Text, ToastAndroid, View } from "react-native";
+import { Button, ScrollView, StyleSheet, ToastAndroid, View } from "react-native";
 import config from "../../config";
 import MovieDeatilsAbout from "../elements/MovieDetailsAbout";
 import MovieDeatilsCast from "../elements/MovieDetailsCast";
@@ -17,8 +17,10 @@ const DetailScreen = () => {
   ];
   const [activeTab, setActiveTab] = useState("about_movie");
   const [movie, setMovie] = useState<any>();
-  const [reviews, setReviews] = useState([]);
+  const [reviews, setReviews] = useState<any[]>([]);
   const [credits, setCredits] = useState<any>([]);
+  const [pageReviews, setPageReviews] = useState(1);
+  const [totalPagesReviews, setTotalPagesReviews] = useState(10);
 
   const getMovieDetailsById = (id: number) => {
     fetch(`https://api.themoviedb.org/3/movie/${ id }?api_key=${ config.TMDB_API_KEY }&language=en-US`)
@@ -34,12 +36,21 @@ const DetailScreen = () => {
       });
   };
 
-  const getReviews = (id: number) => {
-    fetch(`https://api.themoviedb.org/3/movie/${ id }/reviews?api_key=${ config.TMDB_API_KEY }&language=en-US&page=1`)
+  const getReviews = (id: number, page: number = 1) => {
+    fetch(`https://api.themoviedb.org/3/movie/${ id }/reviews?api_key=${ config.TMDB_API_KEY }&language=en-US&page=${ page }`)
       .then(res => res.json())
       .then(data => {
         if (data) {
-          setReviews(data.results);
+          if (page > 1) {
+            setReviews([
+              ...reviews,
+              ...data.results,
+            ]);
+          } else {
+            setReviews(data.results);
+          }
+          setPageReviews(data.page);
+          setTotalPagesReviews(data.total_pages);
         }
       })
       .catch(error => {
@@ -60,6 +71,14 @@ const DetailScreen = () => {
         console.log(error);
         ToastAndroid.show('Get Credits Error', ToastAndroid.SHORT);
       });
+  };
+
+  const loadMoreReviews = () => {
+    const { id } = route.params;
+
+    if (pageReviews < totalPagesReviews) {
+      getReviews(id, pageReviews + 1);
+    }
   };
 
   useEffect(() => {
@@ -92,7 +111,20 @@ const DetailScreen = () => {
         style={ styles.tabContentWrapper }
       >
         { activeTab === 'about_movie' ? <MovieDeatilsAbout description={ movie?.overview } /> : '' }
-        { activeTab === 'reviews' ? <MovieDeatilsReviews list={ reviews } /> : '' }
+        { activeTab === 'reviews' ?
+          <View>
+            <MovieDeatilsReviews list={ reviews } />
+            { totalPagesReviews > 1 ?
+              <Button
+                color="#0296E5"
+                title="Load more"
+                onPress={ loadMoreReviews }
+              />
+              : ''
+            }
+          </View>
+          : ''
+        }
         { activeTab === 'cast' ? <MovieDeatilsCast list={ credits.cast } /> : '' }
       </View>
     </ScrollView>
@@ -108,7 +140,6 @@ const styles = StyleSheet.create({
   },
   tabContentWrapper: {
     marginTop: 24,
-    marginHorizontal: 24,
   },
 });
 

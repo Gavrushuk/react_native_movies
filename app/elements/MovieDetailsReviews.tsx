@@ -6,13 +6,13 @@ type Props = {
 };
 
 const MovieDeatilsReviews = ({ list }: Props) => {
-  const review = (item: any, index: number) => {
+  const review = (item: any) => {
     const API_IMG = "https://image.tmdb.org/t/p/w300";
 
     return (
       <View
         style={ styles.review }
-        key={ index }
+        key={ item.id }
       >
         <View
           style={ styles.reviewLeftSide }
@@ -47,7 +47,7 @@ const MovieDeatilsReviews = ({ list }: Props) => {
   return (
     <View>
       {
-        list.map((item: any, index: number) => review(item, index))
+        list.map((item: any) => review(item))
       }
     </View>
   );
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
   review: {
     flexDirection: 'row',
     marginBottom: 20,
+    marginHorizontal: 25,
   },
   reviewLeftSide: {
     
@@ -67,6 +68,7 @@ const styles = StyleSheet.create({
     borderRadius: 44,
     resizeMode: 'cover',
     objectFit: 'cover',
+    backgroundColor: 'rgba(2, 150, 229, 0.7)',
   },
   reviewRate: {
     textAlign: 'center',

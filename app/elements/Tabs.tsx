@@ -1,5 +1,6 @@
 import React from "react";
 import { Pressable, ScrollView, StyleSheet, Text } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 type Tab = {
   title: string,
@@ -14,7 +15,7 @@ type Props = {
 
 const Tabs = ({ activeTab, listTab, onSelect }: Props) => {
   const Tab = (tab: Tab, index: number) => (
-    <Pressable
+    <TouchableOpacity
       style={[
         styles.btnTab,
         activeTab === tab.value && styles.btnTabActive,
@@ -30,7 +31,7 @@ const Tabs = ({ activeTab, listTab, onSelect }: Props) => {
           activeTab === tab.value && styles.tabTextActive
         ]}
       >{ tab.title }</Text>
-    </Pressable>
+    </TouchableOpacity>
   );
 
   return (
@@ -61,9 +62,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderBottomWidth: 4,
     borderBottomColor: 'transparent',
-    marginHorizontal: 6,
+    marginRight: 25,
     paddingBottom: 10,
-    width: 88,
   },
   btnTabActive: {
     borderBottomColor: '#3A3F47',

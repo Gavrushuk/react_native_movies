@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 16,
     resizeMode: 'cover',
     objectFit: 'cover',
+    backgroundColor: 'rgba(2, 150, 229, 0.7)',
   },
   movieRate: {
     position: 'absolute',
@@ -149,6 +150,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     resizeMode: 'cover',
     objectFit: 'cover',
+    backgroundColor: 'rgb(2, 150, 229)',
   },
   movieDetailsTitle: {
     fontWeight: '600',

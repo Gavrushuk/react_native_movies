@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Image, Pressable, ToastAndroid, StyleSheet, View } from "react-native";
+import { Image, Pressable, ToastAndroid, StyleSheet, View, Button, Text } from "react-native";
 import config from "../../config.js";
 import Tabs from "./Tabs";
 
@@ -19,21 +19,30 @@ const HomeTabs = ({ goToDetail }: Props) => {
     { title: "Top rated", value: "top_rated" },
     { title: "Popular", value: "popular" },
   ];
-
   const [activeTab, setActiveTab] = useState("now_playing");
-
-  const [list, setList] = useState([]);
+  const [list, setList] = useState<any[]>([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(10);
 
   useEffect(() => {
     updateList(activeTab);
   }, [activeTab]);
 
-  const updateList = (tab: string) => {
-    fetch(`https://api.themoviedb.org/3/movie/${ tab }?api_key=${ config.TMDB_API_KEY }&language=en-US&page=1`)
+  const updateList = (tab: string, page: number = 1) => {
+    fetch(`https://api.themoviedb.org/3/movie/${ tab }?api_key=${ config.TMDB_API_KEY }&language=en-US&page=${ page }`)
       .then(res => res.json())
       .then(data => {
         if (data) {
-          setList(data.results);
+          if (page > 1) {
+            setList([
+              ...list,
+              ...data.results,
+            ]);
+          } else {
+            setList(data.results);
+          }
+          setPage(data.page);
+          setTotalPages(data.total_pages);
         }
       })
       .catch(error => {
@@ -42,19 +51,29 @@ const HomeTabs = ({ goToDetail }: Props) => {
       });
   };
 
-  const listCardItem = (item: any, index: number) => {
-    const API_IMG = "https://image.tmdb.org/t/p/w300";
+  const loadMore = () => {
+    if (page < totalPages) {
+      updateList(activeTab, page + 1);
+    }
+  };
+
+  const listCardItem = (item: any) => {
+    const API_IMG = "https://image.tmdb.org/t/p/w200";
 
     return (
       <Pressable
         style={ styles.listCardItem }
         onPress={ () => goToDetail(item.id) }
-        key={ index }
+        key={ item.id }
       >
         <View>
           <Image
             style={ styles.listCardItemImg }
-            source={ { uri: API_IMG + item.poster_path } }
+            source={
+              item.poster_path ?
+                { uri: API_IMG + item.poster_path }
+                : require('../../assets/images/no_poster.png')
+            }
           />
         </View>
       </Pressable>
@@ -75,9 +94,15 @@ const HomeTabs = ({ goToDetail }: Props) => {
         style={ styles.listCard }
       >
         {
-          list.map((item: any, index: number) => listCardItem(item, index))
+          list.map((item: any) => listCardItem(item))
         }
       </View>
+
+      <Button
+        color="#0296E5"
+        title="Load more"
+        onPress={ loadMore }
+      />
     </View>
   );
 };
@@ -100,14 +125,14 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     overflow: 'hidden',
     height: 145,
-    width: `${(100 / 3) - 4}%`,
+    width: `${(100 / 3) - 4.5}%`,
   },
   listCardItemImg: {
     height: '100%',
     width: '100%',
     resizeMode: 'cover',
     objectFit: 'cover',
-  }
+  },
 });
 
 export default HomeTabs;
