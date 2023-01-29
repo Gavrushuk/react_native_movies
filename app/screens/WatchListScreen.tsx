@@ -1,14 +1,33 @@
-import React, { useState } from "react";
-import { SafeAreaView, StyleSheet } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
+import React, { useEffect, useState } from "react";
+import { SafeAreaView, StyleSheet, ToastAndroid } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import MoviesList from "../elements/MoviesList";
 import WatchListNoResults from "../elements/WatchListNoResults";
 import { MainTabScreenProps } from "../navigation/Types";
 
 const WatchListScreen = ({ navigation }: MainTabScreenProps<'WatchList'>) => {
   const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    getWatchListFromStore();
+  }, []);
   
   const goToDatail = (id: number) => {
     navigation.navigate('Detail', { id });
+  };
+
+  const getWatchListFromStore = async () => {
+    try {
+      const value = await AsyncStorage.getItem('WATCH_LIST');
+      
+      if (value !== null) {
+        setMovies(JSON.parse(value));
+      }
+    } catch (error) {
+      console.error(error);
+      ToastAndroid.show('Get Watch List To Store Error', ToastAndroid.SHORT);
+    }
   };
 
   return (
@@ -17,10 +36,14 @@ const WatchListScreen = ({ navigation }: MainTabScreenProps<'WatchList'>) => {
     >
       {
         movies?.length ?
-          <MoviesList
-            list={ movies }
-            goToDetail={ goToDatail }
-          />
+          <ScrollView
+            showsVerticalScrollIndicator={ false }
+          >
+            <MoviesList
+              list={ movies }
+              goToDetail={ goToDatail }
+            />
+          </ScrollView>
         : <WatchListNoResults />
       }
     </SafeAreaView>
