@@ -10,7 +10,7 @@ const WatchListScreen = ({ navigation }: MainTabScreenProps<'WatchList'>) => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    getWatchListFromStore();
+    navigation.addListener('focus', () => getWatchListFromStore());
   }, []);
   
   const goToDatail = (id: number) => {
