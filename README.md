@@ -1,4 +1,4 @@
-# Movies App created with React Native
+# Movies App for Android created with React Native
 
 ## Design from [Figma Community](https://www.figma.com/community/)
 
