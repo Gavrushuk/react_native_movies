@@ -1,4 +1,4 @@
-# Countdown App created with Vue 3 framework
+# Movies App created with React Native
 
 ## Design from [Figma Community](https://www.figma.com/community/)
 
